@@ -55,12 +55,13 @@ public class C08_BestBuyAssertions {
     }
     @Test
     public void francaisTesti(){
-
-
+        driver.get("https://www.bestbuy.com/");
+        WebElement francaisElementi= driver.findElement(By.xpath("//button[text()='Français']"));
+        Assert.assertTrue(francaisElementi.isDisplayed());
     }
     @AfterClass
     public static void teardown(){
-      //  driver.close();
+      driver.close();
     }
 
 
