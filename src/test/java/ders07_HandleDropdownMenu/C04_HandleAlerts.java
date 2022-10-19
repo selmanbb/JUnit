@@ -32,13 +32,15 @@ public class C04_HandleAlerts {
     //      ○ 3. butona tıklayın, uyarıdaki metin kutusuna isminizi yazin,
     //      OK butonuna tıklayın ve result mesajında isminizin görüntülendiğini doğrulayın.
     WebDriver driver;
+
     @Before
-    public void setup(){
+    public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver= new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
+
     @Test
     public void alertTest() throws InterruptedException {
         driver.get("https://the-internet.herokuapp.com/javascript_alerts");
@@ -48,11 +50,12 @@ public class C04_HandleAlerts {
         //      alert'deki OK butonuna tıklayın ve
         driver.switchTo().alert().accept();
         //      result mesajının “You successfully clicked an alert” oldugunu test edin.
-        String expectedSonucYazisi= "You successfully clicked an alert";
-        String actualSonucYazisi= driver.findElement(By.xpath("//p[@id='result']")).getText();
-        Assert.assertEquals(expectedSonucYazisi,actualSonucYazisi);
+        String expectedSonucYazisi = "You successfully clicked an alert";
+        String actualSonucYazisi = driver.findElement(By.xpath("//p[@id='result']")).getText();
+        Assert.assertEquals(expectedSonucYazisi, actualSonucYazisi);
         Thread.sleep(2000);
     }
+
     @Test
     public void dismissalertTest() throws InterruptedException {
         driver.get("https://the-internet.herokuapp.com/javascript_alerts");
@@ -63,10 +66,11 @@ public class C04_HandleAlerts {
         driver.switchTo().alert().dismiss();
         Thread.sleep(2000);
         //      result mesajının “successfuly” icermedigini test edin.
-        String actualSonucYazisi= driver.findElement(By.xpath("//p[@id='result']")).getText();
-        String unexpectedSonuc="successfuly";
+        String actualSonucYazisi = driver.findElement(By.xpath("//p[@id='result']")).getText();
+        String unexpectedSonuc = "successfuly";
         Assert.assertFalse(actualSonucYazisi.contains(unexpectedSonuc));
     }
+
     @Test
     public void sendKeysTesti() throws InterruptedException {
         driver.get("https://the-internet.herokuapp.com/javascript_alerts");
@@ -79,13 +83,14 @@ public class C04_HandleAlerts {
         //      OK butonuna tıklayın
         driver.switchTo().alert().accept();
         //      ve result mesajında isminizin görüntülendiğini doğrulayın.
-        String actualSonucYazisi= driver.findElement(By.xpath("//p[@id='result']")).getText();
-        String expectedIsim="Nevzat Celik";
+        String actualSonucYazisi = driver.findElement(By.xpath("//p[@id='result']")).getText();
+        String expectedIsim = "Nevzat Celik";
         Thread.sleep(3000);
         Assert.assertTrue(actualSonucYazisi.contains(expectedIsim));
     }
+
     @After
-    public void teardown(){
+    public void teardown() {
         driver.close();
     }
 }
